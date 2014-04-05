@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/include_top"
+        android:layout_alignParentTop="true"
+        layout="@layout/title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/include_top"
+        android:orientation="vertical"
+        android:padding="20dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:text="@string/setting_point1"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/setting_pinner_language"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/setting_language_bg"
+            android:prompt="@string/setting_language_prompt" />
+    </LinearLayout>
+
+</RelativeLayout>

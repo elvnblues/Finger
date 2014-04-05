@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">灵犀一指</string>
+    
+    <string name="search_title_hint">输入标题</string>
+    <string name="search_text">查询</string>
+
+    <string name="loding">加载中...</string>
+    <string name="setting">设置</string>
+    
+    <string name="setting_point1">语言:</string>
+    
+    <string name="setting_language_prompt">请选择语言</string>
+</resources>
