@@ -57,7 +57,6 @@ public class TopicDao extends BaseDao {
 					+ " where title like ? and _languageID = "+languageID+" order by _id";
 		
 		String[] selectionArgs = new String[] { "%" + v_title + "%" };
-		System.out.println("Show SQL =="+sqlString);
 		Cursor cursor = null;
 		try{
 			cursor = sqliteDB.rawQuery(sqlString, selectionArgs);
