@@ -29,19 +29,19 @@ public class TopicAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return showCount;
+		return topickList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return position;
+		return topickList.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
-		return position;
+		return topickList.get(position).get_id();
 	}
 
 	@Override
@@ -57,6 +57,7 @@ public class TopicAdapter extends BaseAdapter {
 			holder = (ViewHolder)convertView.getTag();
 		}
 		holder.tv_title_item.setText(topickList.get(position).getTitle());
+		
 		return convertView;
 	}
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.elvn.finger.R;
 
-public class TopicContent extends Activity {
+public class TopicContent extends NotifitionActivity {
 	//UI
 	private TextView tv_content;
 	private TextView tv_inf_title;

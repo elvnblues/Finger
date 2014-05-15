@@ -2,21 +2,24 @@ package com.elvn.finger.ui;
 
 import java.util.List;
 
-import com.elvn.finger.R;
-import com.elvn.finger.adapter.LanguageAdapter;
-import com.elvn.finger.db.dao.LanguageDao;
-import com.elvn.finger.entity.Language;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class SettingAct extends Activity {
+import com.elvn.finger.R;
+import com.elvn.finger.adapter.LanguageAdapter;
+import com.elvn.finger.constrant.Const;
+import com.elvn.finger.constrant.ConstClass;
+import com.elvn.finger.db.dao.LanguageDao;
+import com.elvn.finger.entity.Language;
+
+public class SettingAct extends NotifitionActivity {
 	//UI
 	private TextView title_top_text;
 	private Button title_top_return;
@@ -29,6 +32,18 @@ public class SettingAct extends Activity {
 	private LanguageDao languageDao;
 	private List<Language> languageList;
 	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		int languageID = ConstClass.getSharedPreferencesVal(Const.SETTINGLANGUAGE, SettingAct.this, Const.SETTINGLANGNOW);
+		spinner_language.setSelection(languageID);
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -53,9 +68,12 @@ public class SettingAct extends Activity {
 		languageList = languageDao.getLanguageAll();
 		languageAdapter = new LanguageAdapter(SettingAct.this, languageList);
 		spinner_language.setAdapter(languageAdapter);
+		
+		
 	}
 	private void setListener(){
 		title_top_return.setOnClickListener(btn_OnClickListener);
+		spinner_language.setOnItemSelectedListener(spinner_onItemClickListener);
 	}
 	
 	private OnClickListener btn_OnClickListener = new OnClickListener() {
@@ -71,6 +89,23 @@ public class SettingAct extends Activity {
 			default:
 				break;
 			}
+		}
+	};
+	private OnItemSelectedListener  spinner_onItemClickListener = new OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view,
+				int position, long id) {
+			// TODO 选择语言触发
+			//保存选中的语言ID
+			ConstClass.setSharedPreferencesVal(SettingAct.this, Const.SETTINGLANGUAGE, Const.SETTINGLANGNOW, position);
+			System.out.println("positionposition=="+position);
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) {
+			// TODO Auto-generated method stub
+			
 		}
 	};
 }

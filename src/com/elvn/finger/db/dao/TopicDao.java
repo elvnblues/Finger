@@ -5,11 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.R.integer;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.elvn.finger.db.DBConst;
 
@@ -24,8 +22,9 @@ public class TopicDao extends BaseDao {
 	}
 
 	// column key
-	private static final int _ID = 0;
 
+	private static final String ID = "id";
+	
 	private static final String TITLE = "title";
 
 	private static final String CONTENT = "content";
@@ -48,14 +47,15 @@ public class TopicDao extends BaseDao {
 
 	/**
 	 * 通过Title 模糊查询所有Title
-	 * @param v_title
+	 * @param v_title 关键字
+	 * @param languageID 语言ID
 	 * @return
 	 */
 	public List<Map<String, String>> searchTitle(String v_title,int languageID) {
 		List<Map<String, String>> titleList = new ArrayList<Map<String, String>>();
 		String sqlString = "select  * from " + TOPIC_TABLE
 					+ " where title like ? and _languageID = "+languageID+" order by _id";
-		
+		System.out.println("sqlString == "+sqlString);
 		String[] selectionArgs = new String[] { "%" + v_title + "%" };
 		Cursor cursor = null;
 		try{
@@ -63,6 +63,7 @@ public class TopicDao extends BaseDao {
 			
 			while(cursor.moveToNext()){
 				Map<String, String> titleMap = new HashMap<String, String>();
+				titleMap.put(ID, cursor.getString(0));
 				titleMap.put(TITLE, cursor.getString(1));
 				titleMap.put(CONTENT, cursor.getString(2));
 				titleList.add(titleMap);
@@ -71,6 +72,14 @@ public class TopicDao extends BaseDao {
 				
 		}catch(Exception ex){
 			ex.printStackTrace();
+			if(cursor!=null){
+				try{
+					cursor.close();
+				}catch(Exception e){
+					
+				}
+			}
+		}finally{
 			if(cursor!=null){
 				try{
 					cursor.close();
